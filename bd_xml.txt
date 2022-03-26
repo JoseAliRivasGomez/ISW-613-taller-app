@@ -59,9 +59,6 @@
 <row name="phone" null="1" autoincrement="0">
 <datatype>VARCHAR</datatype>
 <default>NULL</default></row>
-<row name="avatar" null="1" autoincrement="0">
-<datatype>VARCHAR</datatype>
-<default>NULL</default></row>
 <row name="is_active" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
