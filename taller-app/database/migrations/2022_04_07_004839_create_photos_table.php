@@ -15,7 +15,11 @@ return new class extends Migration
     {
         Schema::create('photos', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('workorder_id');
+            $table->string('link');
             $table->timestamps();
+            /*NOW THE REFERENCES FOR FOREIGN KEYS*/ 
+            $table->foreign('workorder_id')->references('id')->on('workorders');
         });
     }
 

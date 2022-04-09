@@ -19,7 +19,9 @@ class DatabaseSeeder extends Seeder
             ClientSeeder::class,
             WorkorderStateSeeder::class,
             PieceSeeder::class,
-            WorkorderSeeder::class
+            WorkorderSeeder::class,
+            PhotoSeeder::class,
+            WorkorderChangedPiecesSeeder::class,
         ]);
     }
 }

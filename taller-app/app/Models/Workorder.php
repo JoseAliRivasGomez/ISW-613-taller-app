@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Workorder extends Model
 {
     use HasFactory;
-    protected $fillable = ['client_id','state_id','user_id','car_initial_state','car_initial_date','car_final_state','car_final_date','car_workorder_price'];
+    protected $fillable = ['client_id','state_id','user_id','car_initial_state','car_initial_date','car_final_state','car_final_date','car_workorder_price','client_sign'];
 
 
     /* PREVISTA PARA HACER INVENTARIO

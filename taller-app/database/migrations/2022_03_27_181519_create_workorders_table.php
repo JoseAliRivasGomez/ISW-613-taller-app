@@ -14,6 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('workorders', function (Blueprint $table) {
+            
             $table->id();
             $table->unsignedBigInteger('client_id');
             $table->unsignedBigInteger('state_id');
@@ -23,6 +24,7 @@ return new class extends Migration
             $table->string('car_final_state');
             $table->timestamp('car_final_date');
             $table->double('car_workorder_price');
+            $table->string('client_sign');
             $table->timestamps(); //this must be on every migration
             /*NOW THE REFERENCES FOR FOREIGN KEYS*/ 
             $table->foreign('client_id')->references('id')->on('clients');

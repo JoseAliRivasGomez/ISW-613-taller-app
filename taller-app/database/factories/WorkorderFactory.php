@@ -33,6 +33,7 @@ class WorkorderFactory extends Factory
             'car_final_state' => $this->faker-> text(),
             'car_final_date' => $this->faker-> dateTime(),
             'car_workorder_price' => $this->faker-> numberBetween(100, 1000000),
+            'client_sign' => $this->faker-> text(),
         ];
     }
 }
