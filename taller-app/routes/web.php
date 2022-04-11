@@ -6,6 +6,7 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\WorkorderStateController;
 use App\Http\Controllers\PieceController;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -53,4 +54,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/pieces', [PieceController::class, 'store']);
     Route::put('/pieces/{id}', [PieceController::class, 'update']);
     Route::delete('/pieces/{id}', [PieceController::class, 'destroy']);
+
+
+    Route::resource('/img', App\Http\Controllers\ImageController::class);
 });

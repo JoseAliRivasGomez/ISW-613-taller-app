@@ -75,6 +75,10 @@
 <datatype>INTEGER</datatype>
 <default>NULL</default><relation table="workorders_states" row="id" />
 </row>
+<row name="user_id" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="users" row="id" />
+</row>
 <row name="car_initial_state" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -87,23 +91,12 @@
 <row name="car_exit_date" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
-<row name="photos" null="1" autoincrement="0">
-<datatype>INTEGER</datatype>
-<default>NULL</default></row>
 <row name="cost" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
 <row name="client_sign" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
-<row name="created_by" null="1" autoincrement="0">
-<datatype>INTEGER</datatype>
-<default>NULL</default><relation table="users" row="id" />
-</row>
-<row name="updated_by" null="1" autoincrement="0">
-<datatype>INTEGER</datatype>
-<default>NULL</default><relation table="users" row="id" />
-</row>
 <key type="PRIMARY" name="">
 <part>id</part>
 </key>
@@ -131,7 +124,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="1094" y="123" name="pieces">
+<table x="1076" y="111" name="pieces">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -151,7 +144,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="734" y="134" name="workoders_changed_pieces">
+<table x="737" y="194" name="workoders_changed_pieces">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -167,7 +160,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="716" y="337" name="workorders_states">
+<table x="738" y="363" name="workorders_states">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -175,6 +168,21 @@
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
 <row name="is_active" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+</table>
+<table x="735" y="42" name="photos">
+<row name="id" null="1" autoincrement="1">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<row name="workorder_id" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="workorders" row="id" />
+</row>
+<row name="link" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
 <key type="PRIMARY" name="">
