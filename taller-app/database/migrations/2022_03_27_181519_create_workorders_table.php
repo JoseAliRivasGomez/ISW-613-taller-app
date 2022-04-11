@@ -21,10 +21,10 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->string('car_initial_state');
             $table->timestamp('car_initial_date');
-            $table->string('car_final_state');
-            $table->timestamp('car_final_date');
-            $table->double('car_workorder_price');
-            $table->string('client_sign');
+            $table->string('car_final_state')->nullable();
+            $table->timestamp('car_final_date')->nullable();
+            $table->double('car_workorder_price')->nullable();
+            $table->string('client_sign')->nullable();
             $table->timestamps(); //this must be on every migration
             /*NOW THE REFERENCES FOR FOREIGN KEYS*/ 
             $table->foreign('client_id')->references('id')->on('clients');
