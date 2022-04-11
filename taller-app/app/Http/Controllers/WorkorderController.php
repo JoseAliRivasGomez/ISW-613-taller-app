@@ -38,8 +38,6 @@ class WorkorderController extends Controller
             $workorders->where('client_id', $request->client_id);
         }
 
-        /*            $workorders->where('car_initial_state', 'ilike', "%$request->car_initial_state%");
-
         /*check*/
         if ($request->has('state_id') && $request->state_id) {
             $workorders->where('state_id', $request->state_id);

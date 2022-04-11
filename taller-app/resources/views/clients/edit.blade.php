@@ -29,9 +29,6 @@
                         <input class="mt-5" type="tel" name="phone" placeholder="####-####" pattern="[0-9]{4}-[0-9]{4}" required value="{{$client->phone}}"></br>
                         <label class="mt-5">Email:</label>
                         <input class="mt-5 mb-5" type="email" name="email" required value="{{$client->email}}"></br>
-                        <label>Is Active:</label>
-                        <input type="hidden" name="is_active" value="0">
-                        <input type="checkbox" name="is_active" value="1" {{$client->is_active || old('is_active', 0) === 1 ? 'checked' : ''}}></br>
                         <button class="mt-5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Save</button>
                         <a class="mt-5 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" href="/clients">Cancel</a>
                     </form>
