@@ -18,7 +18,10 @@ class DatabaseSeeder extends Seeder
         $this->call([
             ClientSeeder::class,
             WorkorderStateSeeder::class,
-            PieceSeeder::class
+            PieceSeeder::class,
+            WorkorderSeeder::class,
+            PhotoSeeder::class,
+            WorkorderChangedPiecesSeeder::class,
         ]);
     }
 }
