@@ -48,7 +48,6 @@ class WorkorderController extends Controller
             $workorders->where('user_id', $request->user_id);
         }
 
-
       
         if ($request->has('car_initial_date') && $request->car_initial_date) {
             $workorders->where('car_initial_date', 'ilike', "%$request->car_initial_date%");
