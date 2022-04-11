@@ -24,40 +24,48 @@ class WorkorderController extends Controller
     public function index(Request $request)
     {
         $workorders = Workorder::query()->orderBy('id');
+        $states = WorkorderState::all();
+        $clients = Client::all();
+        $users = User::all();
+
 
         if ($request->has('id') && $request->id) {
             $workorders->where('id', $request->id);
         }
-        if ($request->has('client_id') && $request->client_id) {
+
+        /*check*/
+        if ($request->has('client_name') && $request->client_name) {
             $workorders->where('client_id', $request->client_id);
         }
+
+        /*            $workorders->where('car_initial_state', 'ilike', "%$request->car_initial_state%");
+
+        /*check*/
         if ($request->has('state_id') && $request->state_id) {
             $workorders->where('state_id', $request->state_id);
         }
+
+        /*check*/
         if ($request->has('user_id') && $request->user_id) {
             $workorders->where('user_id', $request->user_id);
         }
 
-        if ($request->has('car_initial_state') && $request->car_initial_state) {
-            $workorders->where('car_initial_state', 'ilike', "%$request->car_initial_state%");
-        }
+
+      
         if ($request->has('car_initial_date') && $request->car_initial_date) {
             $workorders->where('car_initial_date', 'ilike', "%$request->car_initial_date%");
         }
-        if ($request->has('car_final_state') && $request->car_final_state) {
-            $workorders->where('car_final_state', 'ilike', "%$request->car_final_state%");
-        }
+        
         if ($request->has('car_final_date') && $request->car_final_date) {
             $workorders->where('car_final_date', 'ilike', "%$request->car_final_date%");
         }
-        if ($request->has('car_workorder_price') && $request->car_workorder_price) {
-            $workorders->where('car_workorder_price', 'ilike', "%$request->car_workorder_price%");
-        }
-        if ($request->has('client_sign') && $request->client_sign) {
-            $workorders->where('client_sign', 'ilike', "%$request->client_sign%");
-        }
+        
 
-        return view('workorders.index', ['workorders' => $workorders->paginate(10)]);
+        return view('workorders.index', ['workorders' => $workorders->paginate(10),
+        'states' => $states,
+        'clients' => $clients,
+        'users' => $users]);
+
     }
 
     /**

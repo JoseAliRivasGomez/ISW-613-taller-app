@@ -14,6 +14,6 @@ class WorkorderStateSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\WorkorderState::factory(10)->create();
+        \App\Models\WorkorderState::factory(3)->create();
     }
 }
