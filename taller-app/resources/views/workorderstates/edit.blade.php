@@ -23,9 +23,6 @@
                         @method('PUT')
                         <label class="mt-5">Description:</label>
                         <input class="mt-5" type="text" name="description" required value="{{$workorderState->description}}"></br>
-                        <label>Is Active:</label>
-                        <input type="hidden" name="is_active" value="0">
-                        <input type="checkbox" name="is_active" value="1" {{$workorderState->is_active || old('is_active', 0) === 1 ? 'checked' : ''}}></br>
                         <button class="mt-5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Save</button>
                         <a class="mt-5 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" href="/workorderstates">Cancel</a>
                     </form>
