@@ -21,7 +21,7 @@ class ImageController extends Controller
     {
         //
         $expiresAt = new \DateTime('tomorrow');
-        $imageReference = app('firebase.storage')->getBucket()->object("Images/defT5uT7SDu9K5RFtIdl.png");
+        $imageReference = app('firebase.storage')->getBucket()->object("Images/x.jpg");
 
         if ($imageReference->exists()) {
           $image = $imageReference->signedUrl($expiresAt);

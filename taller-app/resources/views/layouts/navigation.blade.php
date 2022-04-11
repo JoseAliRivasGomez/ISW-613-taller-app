@@ -24,6 +24,9 @@
                     <x-nav-link :href="route('workorderstates')" :active="request()->routeIs('workorderstates')">
                         Workorder States
                     </x-nav-link>
+                    <x-nav-link :href="route('workorders')" :active="request()->routeIs('workorders')">
+                        Workorders
+                    </x-nav-link>
                 </div>
             </div>
 

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('workorder_id');
             $table->unsignedBigInteger('piece_id');
+            $table->double('quantity');
             $table->timestamps();
             /*NOW THE REFERENCES FOR FOREIGN KEYS*/ 
             $table->foreign('workorder_id')->references('id')->on('workorders');

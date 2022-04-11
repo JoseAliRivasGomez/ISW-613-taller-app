@@ -144,7 +144,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="737" y="194" name="workoders_changed_pieces">
+<table x="737" y="192" name="workoders_changed_pieces">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -156,6 +156,9 @@
 <datatype>INTEGER</datatype>
 <default>NULL</default><relation table="pieces" row="id" />
 </row>
+<row name="quantity" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
 <key type="PRIMARY" name="">
 <part>id</part>
 </key>

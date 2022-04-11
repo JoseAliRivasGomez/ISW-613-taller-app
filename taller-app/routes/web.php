@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\WorkorderStateController;
 use App\Http\Controllers\PieceController;
-
+use App\Http\Controllers\WorkorderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,6 +55,17 @@ Route::group(['middleware' => ['auth']], function () {
     Route::put('/pieces/{id}', [PieceController::class, 'update']);
     Route::delete('/pieces/{id}', [PieceController::class, 'destroy']);
 
+    Route::get('/workorders', [WorkorderController::class, 'index'])->name('workorders');
+    Route::get('/workorders/create', [WorkorderController::class, 'create']);
+    Route::get('/workorders/{id}/edit', [WorkorderController::class, 'edit']);
+    Route::get('/workorders/{id}/delete', [WorkorderController::class, 'delete']);
+    Route::post('/workorders', [WorkorderController::class, 'store']);
+    Route::put('/workorders/{id}', [WorkorderController::class, 'update']);
+    Route::delete('/workorders/{id}', [WorkorderController::class, 'destroy']);
+
+    Route::get('/workorders/{id}/pieces_list', [WorkorderController::class, 'pieces_list']);
+    Route::post('/workorders/{id}/pieces_list', [WorkorderController::class, 'pieces_list']);
+    Route::delete('/workorders/{workorder_id}/pieces_list/{id}', [WorkorderController::class, 'removePiece']);
 
     Route::resource('/img', App\Http\Controllers\ImageController::class);
 });

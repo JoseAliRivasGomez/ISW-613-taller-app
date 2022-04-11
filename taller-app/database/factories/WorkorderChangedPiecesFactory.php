@@ -24,6 +24,7 @@ class WorkorderChangedPiecesFactory extends Factory
         return [
             'workorder_id' => $this->faker->randomElement($workorder_ids),
             'piece_id' => $this->faker->randomElement($piece_ids),
+            'quantity' => $this->faker->numberBetween(1, 100),
         ];
     }
 }

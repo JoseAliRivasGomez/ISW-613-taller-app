@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class WorkorderChangedPieces extends Model
 {
     use HasFactory;
-    protected $fillable = ['workorder_id','piede_id',];
+    protected $fillable = ['workorder_id','piece_id', "quantity"];
 
     public function workorder()
     {
