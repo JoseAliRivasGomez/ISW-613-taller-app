@@ -67,5 +67,13 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/workorders/{id}/pieces_list', [WorkorderController::class, 'pieces_list']);
     Route::delete('/workorders/{workorder_id}/pieces_list/{id}', [WorkorderController::class, 'removePiece']);
 
-    Route::resource('/img', App\Http\Controllers\ImageController::class);
+    Route::get('/workorders/{id}/photos_list', [WorkorderController::class, 'photos_list']);
+    Route::post('/workorders/{id}/photos_list', [WorkorderController::class, 'photos_list']);
+    Route::delete('/workorders/{workorder_id}/photos_list/{id}', [WorkorderController::class, 'removePhoto']);
+
+    Route::get('/workorders/{id}/signature', [WorkorderController::class, 'signature']);
+    Route::post('/workorders/{id}/signature', [WorkorderController::class, 'signature']);
+
+    Route::get('/workorders/{id}/export_pdf', [WorkorderController::class, 'generatePDF']);
+
 });
