@@ -41,7 +41,6 @@
                             <th scope="col" class="px-6 py-4 text-left uppercase tracking-wider">Last Name</th>
                             <th scope="col" class="px-6 py-4 text-left uppercase tracking-wider">Phone</th>
                             <th scope="col" class="px-6 py-4 text-left uppercase tracking-wider">Email</th>
-                            <th scope="col" class="px-6 py-4 text-left uppercase tracking-wider">is Active</th>
                             <th scope="col" class="px-6 py-4 text-left uppercase tracking-wider"></th>
                         </tr>
                         </thead>
@@ -53,7 +52,6 @@
                             <td class="px-6 py-2 whitespace-nowrap">{{$client->last_name}}</td>
                             <td class="px-6 py-2 whitespace-nowrap">{{$client->phone}}</td>
                             <td class="px-6 py-2 whitespace-nowrap">{{$client->email}}</td>
-                            <td class="px-6 py-2 whitespace-nowrap"><input type="checkbox" name="is_active" {{$client->is_active ? 'checked' : ''}} disabled></td>
                             <td class="px-6 py-2 whitespace-nowrap">
                                 <a class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold px-4 rounded" href="/clients/{{$client->id}}/edit">Edit</a>
                                 <a class="bg-red-500 hover:bg-red-700 text-white font-bold px-4 rounded" href="/clients/{{$client->id}}/delete">Delete</a>

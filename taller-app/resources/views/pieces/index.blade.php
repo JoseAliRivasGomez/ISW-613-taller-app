@@ -37,7 +37,6 @@
                             <th scope="col" class="px-6 py-4 text-left uppercase tracking-wider">Description</th>
                             <th scope="col" class="px-6 py-4 text-left uppercase tracking-wider">Quantity</th>
                             <th scope="col" class="px-6 py-4 text-left uppercase tracking-wider">Cost</th>
-                            <th scope="col" class="px-6 py-4 text-left uppercase tracking-wider">is Active</th>
                             <th scope="col" class="px-6 py-4 text-left uppercase tracking-wider"></th>
                         </tr>
                         </thead>
@@ -48,7 +47,6 @@
                             <td class="px-6 py-2 whitespace-nowrap">{{$piece->description}}</td>
                             <td class="px-6 py-2 whitespace-nowrap">{{$piece->quantity}}</td>
                             <td class="px-6 py-2 whitespace-nowrap">{{$piece->cost}}</td>
-                            <td class="px-6 py-2 whitespace-nowrap"><input type="checkbox" name="is_active" {{$piece->is_active ? 'checked' : ''}} disabled></td>
                             <td class="px-6 py-2 whitespace-nowrap">
                                 <a class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold px-4 rounded" href="/pieces/{{$piece->id}}/edit">Edit</a>
                                 <a class="bg-red-500 hover:bg-red-700 text-white font-bold px-4 rounded" href="/pieces/{{$piece->id}}/delete">Delete</a>

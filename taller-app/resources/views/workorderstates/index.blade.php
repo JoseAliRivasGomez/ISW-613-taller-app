@@ -29,7 +29,6 @@
                         <tr>
                             <th scope="col" class="px-6 py-4 text-left uppercase tracking-wider">Id</th>
                             <th scope="col" class="px-6 py-4 text-left uppercase tracking-wider">Description</th>
-                            <th scope="col" class="px-6 py-4 text-left uppercase tracking-wider">is Active</th>
                             <th scope="col" class="px-6 py-4 text-left uppercase tracking-wider"></th>
                         </tr>
                         </thead>
@@ -38,7 +37,6 @@
                         <tr>
                             <td class="px-6 py-2 whitespace-nowrap">{{$workorderState->id}}</td>
                             <td class="px-6 py-2 whitespace-nowrap">{{$workorderState->description}}</td>
-                            <td class="px-6 py-2 whitespace-nowrap"><input type="checkbox" name="is_active" {{$workorderState->is_active ? 'checked' : ''}} disabled></td>
                             <td class="px-6 py-2 whitespace-nowrap">
                                 <a class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold px-4 rounded" href="/workorderstates/{{$workorderState->id}}/edit">Edit</a>
                                 <a class="bg-red-500 hover:bg-red-700 text-white font-bold px-4 rounded" href="/workorderstates/{{$workorderState->id}}/delete">Delete</a>

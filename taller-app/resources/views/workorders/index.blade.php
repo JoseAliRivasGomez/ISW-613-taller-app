@@ -19,7 +19,7 @@
                                     <input type="text" name="id" autofocus value="{{request()->get('id')}}">
                                 </td>
                                 <td>
-                                    <input type="text" name="client_id" autofocus value="{{request()->get('client_id')}}">
+                                    <input type="text" name="client_name" autofocus value="{{request()->get('client_name')}}">
                                 </td>
                                 <td>
                                     <input type="text" name="state_id" autofocus value="{{request()->get('state_id')}}">
@@ -27,24 +27,15 @@
                                 <td>
                                     <input type="text" name="user_id" autofocus value="{{request()->get('user_id')}}">
                                 </td>
-                                <td>
-                                    <input type="text" name="car_initial_state" value="{{request()->get('car_initial_state')}}">
-                                </td>
+                                
                                 <td>
                                     <input type="text" name="car_initial_date" value="{{request()->get('car_initial_date')}}">
                                 </td>
-                                <td>
-                                    <input type="text" name="car_final_state" value="{{request()->get('car_final_state')}}">
-                                </td>
+                               
                                 <td>
                                     <input type="text" name="car_final_date" value="{{request()->get('car_final_date')}}">
                                 </td>
-                                <td>
-                                    <input type="number" name="car_workorder_price" value="{{request()->get('car_workorder_price')}}">
-                                </td>
-                                <td>
-                                    <input type="text" name="client_sign" value="{{request()->get('client_sign')}}">
-                                </td>
+                               
                                 <td>
                                     <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Filter</button>
                                 </td>
@@ -52,15 +43,11 @@
                         </tr>
                         <tr>
                             <th scope="col" class="px-6 py-4 text-left uppercase tracking-wider">Id</th>
-                            <th scope="col" class="px-6 py-4 text-left uppercase tracking-wider">Client Id</th>
-                            <th scope="col" class="px-6 py-4 text-left uppercase tracking-wider">State Id</th>
+                            <th scope="col" class="px-6 py-4 text-left uppercase tracking-wider">Client</th>
+                            <th scope="col" class="px-6 py-4 text-left uppercase tracking-wider">State</th>
                             <th scope="col" class="px-6 py-4 text-left uppercase tracking-wider">User Id</th>
-                            <th scope="col" class="px-6 py-4 text-left uppercase tracking-wider">Initial State</th>
                             <th scope="col" class="px-6 py-4 text-left uppercase tracking-wider">Initial Date</th>
-                            <th scope="col" class="px-6 py-4 text-left uppercase tracking-wider">Final State</th>
                             <th scope="col" class="px-6 py-4 text-left uppercase tracking-wider">Final Date</th>
-                            <th scope="col" class="px-6 py-4 text-left uppercase tracking-wider">Cost</th>
-                            <th scope="col" class="px-6 py-4 text-left uppercase tracking-wider">Client Sign</th>
                             <th scope="col" class="px-6 py-4 text-left uppercase tracking-wider"></th>
                         </tr>
                         </thead>
@@ -68,15 +55,40 @@
                         @forelse ($workorders as $workorder)
                         <tr>
                             <td class="px-6 py-2 whitespace-nowrap">{{$workorder->id}}</td>
-                            <td class="px-6 py-2 whitespace-nowrap">{{$workorder->client_id}}</td>
-                            <td class="px-6 py-2 whitespace-nowrap">{{$workorder->state_id}}</td>
-                            <td class="px-6 py-2 whitespace-nowrap">{{$workorder->user_id}}</td>
-                            <td class="px-6 py-2 whitespace-nowrap">{{substr($workorder->car_initial_state, 0, 20)}}...</td>
+                            <td class="px-6 py-2 whitespace-nowrap">
+                            @foreach ($clients as $client)
+                                @if ($workorder->client_id === $client->id)
+                                    <option value="{{$client->id}}" selected>
+                                        {{$client->first_name}} {{$client->last_name}}
+                                    </option>
+                                @endif
+                            @endforeach
+                            </td>
+                            
+                            <td class="px-6 py-2 whitespace-nowrap"> 
+                                @foreach ($states as $state)
+                                @if ($workorder->state_id === $state->id)
+                                    <option value="{{$state->id}}" selected>
+                                        {{$state->description}} 
+                                    </option>             
+                                @endif
+                                @endforeach 
+                            </td>
+
+                            <td class="px-6 py-2 whitespace-nowrap">
+                            
+                            @foreach ($users as $user)
+                                @if ($workorder->user_id === $user->id)
+                                    <option value="{{$user->id}}" selected>
+                                        {{$user->first_name}} {{$user->last_name}} 
+                                    </option>             
+                                @endif
+                                @endforeach 
+                            
+                            </td>
+
                             <td class="px-6 py-2 whitespace-nowrap">{{$workorder->car_initial_date}}</td>
-                            <td class="px-6 py-2 whitespace-nowrap">{{substr($workorder->car_final_state, 0, 20)}}...</td>
                             <td class="px-6 py-2 whitespace-nowrap">{{$workorder->car_final_date}}</td>
-                            <td class="px-6 py-2 whitespace-nowrap">{{$workorder->car_workorder_price}}</td>
-                            <td class="px-6 py-2 whitespace-nowrap">{{substr($workorder->client_sign, 0, 20)}}</td>
                             <td class="px-6 py-2 whitespace-nowrap">
                                 <a class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold px-4 rounded" href="/workorders/{{$workorder->id}}/edit">Edit</a>
                                 <a class="bg-blue-500 hover:bg-blue-700 text-white font-bold px-4 rounded" href="/workorders/{{$workorder->id}}/pieces_list">Pieces</a>
