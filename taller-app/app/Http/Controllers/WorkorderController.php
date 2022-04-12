@@ -275,6 +275,9 @@ class WorkorderController extends Controller
     public function generatePDF($id)
     {
 
+        File::deleteDirectory(public_path('firebase-temp-uploads'));
+        File::makeDirectory(public_path('firebase-temp-uploads'), 0777, true, true);
+
         $workorder = Workorder::find($id);
         $client = Client::find($workorder->client_id);
         $user = User::find($workorder->user_id);
@@ -335,8 +338,6 @@ class WorkorderController extends Controller
         ];
           
         $pdf = PDF::loadView('workorders.my-pdf-file', $data);
-
-        //File::deleteDirectory(public_path('firebase-temp-uploads'));
 
         return $pdf->download('Workorder '.$workorder->id.'.pdf');
     }
