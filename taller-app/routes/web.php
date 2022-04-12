@@ -67,5 +67,4 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/workorders/{id}/pieces_list', [WorkorderController::class, 'pieces_list']);
     Route::delete('/workorders/{workorder_id}/pieces_list/{id}', [WorkorderController::class, 'removePiece']);
 
-    Route::resource('/img', App\Http\Controllers\ImageController::class);
 });
