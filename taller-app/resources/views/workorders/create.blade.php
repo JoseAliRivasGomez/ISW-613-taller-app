@@ -21,7 +21,8 @@
 
                     <form method="POST" action="/workorders">
                         @csrf
-                        <h1 class="font-bold text-2xl text-gray-800 leading-tight">
+                        
+                        <h1 class="font-bold text-3xl text-gray-800 leading-tight">
                         Initial Diagnostic
                         </h1>
 
@@ -35,6 +36,12 @@
                             </option>
                             @endforeach
                         </select></br>
+                       
+                        <label class="mt-5">Car Initial State:</label>
+                        <textarea class="mt-5" name="car_initial_state" rows="4" cols="50"  required></textarea></br>
+
+                        <label class="mt-5">Initial Date:</label>
+                        <input class="mt-5" type="date" name="car_initial_date" required></br>
 
                         <label class="mt-5">Workorder State:</label>
                         <select class="mt-5" name="state_id">
@@ -44,12 +51,6 @@
                             </option>
                             @endforeach
                         </select></br>
-                       
-                        <label class="mt-5">Car Initial State:</label>
-                        <textarea class="mt-5" name="car_initial_state" rows="4" cols="50"  required></textarea></br>
-
-                        <label class="mt-5">Initial Date:</label>
-                        <input class="mt-5" type="date" name="car_initial_date" required></br>
 
                         <button class="mt-5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Save</button>
                         <a class="mt-5 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" href="/workorders">Cancel</a>
@@ -60,10 +61,5 @@
     </div>
 </x-app-layout>
 
-                        <label class="mt-5">Car Final State:</label>
-                        <textarea class="mt-5" name="car_final_state" rows="4" cols="50"></textarea></br>
-                        <label class="mt-5">Final Date:</label>
-                        <input class="mt-5" type="date" name="car_final_date"></br>
-                        <label class="mt-5">Workorder cost:</label>
-                        <input class="mt-5" type="number" name="car_workorder_price"></br>
+                        
                         

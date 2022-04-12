@@ -358,9 +358,11 @@ class WorkorderController extends Controller
         $workorder = Workorder::find($id);
         $states = WorkorderState::all();
         $clients = Client::all();
+        $users = User::all();
         return view('workorders.edit', ['workorder' => $workorder,
         'states' => $states,
-        'clients' => $clients]);
+        'clients' => $clients,
+        'users' => $users]);
     }
 
     /**
