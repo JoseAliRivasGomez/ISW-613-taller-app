@@ -26,7 +26,7 @@
                         <a class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" href="/workorders">Cancel</a>
                     </form>
                     <ul class="mt-6">
-                        <label>Pieces:</label>
+                        <label>Pieces:</label></br></br>
                         @forelse ($pieces_workorder as $line)
                         <li class="inline mt-2">
                             <div class="mr-2">
@@ -38,7 +38,7 @@
                             </div>
                             <div>
                                 {{$line->quantity}} of {{$line->piece->description}}
-                            </div>
+                            </div></br>
                         </li>
                         @empty
                         <li>

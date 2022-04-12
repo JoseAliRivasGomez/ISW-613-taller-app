@@ -76,7 +76,7 @@
                             <td class="px-6 py-2 whitespace-nowrap">{{substr($workorder->car_final_state, 0, 20)}}...</td>
                             <td class="px-6 py-2 whitespace-nowrap">{{$workorder->car_final_date}}</td>
                             <td class="px-6 py-2 whitespace-nowrap">{{$workorder->car_workorder_price}}</td>
-                            <td class="px-6 py-2 whitespace-nowrap">{{substr($workorder->client_sign, 0, 20)}}...</td>
+                            <td class="px-6 py-2 whitespace-nowrap">{{substr($workorder->client_sign, 0, 20)}}</td>
                             <td class="px-6 py-2 whitespace-nowrap">
                                 <a class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold px-4 rounded" href="/workorders/{{$workorder->id}}/edit">Edit</a>
                                 <a class="bg-blue-500 hover:bg-blue-700 text-white font-bold px-4 rounded" href="/workorders/{{$workorder->id}}/pieces_list">Pieces</a>

@@ -177,7 +177,9 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
-        Kreait\Laravel\Firebase\ServiceProvider::class
+        Kreait\Laravel\Firebase\ServiceProvider::class,
+
+        Barryvdh\DomPDF\ServiceProvider::class,
 
     ],
 
@@ -194,6 +196,7 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // ...
+        'PDF' => Barryvdh\DomPDF\Facade::class,
     ])->toArray(),
 
 ];
