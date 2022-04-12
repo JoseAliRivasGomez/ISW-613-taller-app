@@ -14,6 +14,15 @@ use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
+use Kreait\Firebase\Auth as FirebaseAuth;
+use Kreait\Firebase\Auth\SignInResult\SignInResult;
+use Kreait\Firebase\Exception\FirebaseException;
+use Google\Cloud\Firestore\FirestoreClient;
+use Session;
+
+use PDF;
+use Illuminate\Support\Facades\File;
+
 class WorkorderController extends Controller
 {
     /**
@@ -138,6 +147,194 @@ class WorkorderController extends Controller
     }
 
 
+
+    public function photos_list(Request $request, $id)
+    {
+        if ($request->isMethod('post')) {
+
+            $request->validate([
+                'photos' => 'required',
+            ]);
+
+            if($request->hasfile('photos'))
+            {
+                foreach($request->file('photos') as $image)
+                {
+                    
+                    //$input = $request->all();
+                    //$image = $request->file('photo'); //image file from frontend
+            
+                    //$student   = app('firebase.firestore')->database()->collection('Images')->document('defT5uT7SDu9K5RFtIdl');
+                    $firebase_storage_path = 'Images/';
+                    //$name     = $student->id();
+                    $localfolder = public_path('firebase-temp-uploads') .'/';
+                    $extension = $image->getClientOriginalExtension();
+                    //$newName = time()*1000;
+                    $newName = uniqid();
+                    $file      = $newName . '.' . $extension;
+                    if ($image->move($localfolder, $file)) {
+                        $uploadedfile = fopen($localfolder.$file, 'r');
+                        app('firebase.storage')->getBucket()->upload($uploadedfile, ['name' => $firebase_storage_path . $file]);
+                        //will remove from local laravel folder
+                        unlink($localfolder . $file);
+                        //Session::flash('message', 'Succesfully Uploaded');
+                    }
+
+                    $data = $request->all();
+                    $data['link'] = $file;
+
+                    Photo::create($data);
+
+                    //sleep(1);
+
+                }
+
+                alert()->success('Successfull','The photos have been added to workorder');
+                return redirect("/workorders/$id/photos_list");
+            }
+
+        }
+
+        $workorder = Workorder::find($id);
+        $photos_workorder = Photo::where('workorder_id', $workorder->id)->get();
+
+        $images = array();
+        foreach ($photos_workorder as $photo) {
+            $expiresAt = new \DateTime('tomorrow');
+            $imageReference = app('firebase.storage')->getBucket()->object("Images/".$photo->link);
+
+            if ($imageReference->exists()) {
+            $image = $imageReference->signedUrl($expiresAt);
+            } else {
+            $image = null;
+            }
+            array_push($images,$image);
+
+        } 
+
+        return view('workorders.photos_list', [
+            'workorder' => $workorder,
+            'photos_workorder' => $photos_workorder,
+            'images' => $images
+        ]);
+    }
+
+    public function removePhoto(Request $request)
+    {
+        $link = DB::table('photos')->where('id', $request->id)->value('link');
+        Photo::where(['id' => $request->id, 'workorder_id' => $request->workorder_id])->delete();
+        $imageDeleted = app('firebase.storage')->getBucket()->object("Images/".$link)->delete();
+        alert()->success('Successfull','The photo has been removed of workorder');
+        return redirect("/workorders/$request->workorder_id/photos_list");
+    }
+
+
+    public function signature(Request $request, $id)
+    {
+        if ($request->isMethod('post')) {
+
+            $folderPath = public_path('firebase-temp-uploads') .'/';
+            $image_parts = explode(";base64,", $request->signed);
+            $image_type_aux = explode("image/", $image_parts[0]);
+            $image_type = $image_type_aux[1];
+            $image_base64 = base64_decode($image_parts[1]);
+            $unique = uniqid();
+            $file = $folderPath . $unique . '.'.$image_type;
+            file_put_contents($file, $image_base64);
+
+            $image = $file; //image file from frontend
+    
+            $firebase_storage_path = 'Images/';
+            $localfolder = public_path('firebase-temp-uploads') .'/';
+
+            $file = $unique . '.'.$image_type;
+            $uploadedfile = fopen($localfolder.$file, 'r');
+            app('firebase.storage')->getBucket()->upload($uploadedfile, ['name' => $firebase_storage_path . $file]);
+            //will remove from local laravel folder
+            unlink($localfolder . $file);
+            //Session::flash('message', 'Succesfully Uploaded');
+            
+
+            $workorder = Workorder::find($request->workorder_id);
+            $workorder->update(['client_sign' => $file]);
+
+            alert()->success('Successfull','The signature has been added to workorder');
+            return redirect("/workorders");
+        }
+        $workorder = Workorder::find($id);
+        return view('workorders.signature', [
+            'workorder' => $workorder
+        ]);
+    }
+
+    public function generatePDF($id)
+    {
+
+        $workorder = Workorder::find($id);
+        $client = Client::find($workorder->client_id);
+        $user = User::find($workorder->user_id);
+        $workorderState = WorkorderState::find($workorder->state_id);
+
+        $pieces_workorder = WorkorderChangedPieces::where('workorder_id', $workorder->id)->get();
+        $photos_workorder = Photo::where('workorder_id', $workorder->id)->get();
+
+        //$images = array();
+        foreach ($photos_workorder as $photo) {
+            $expiresAt = new \DateTime('tomorrow');
+            $imageReference = app('firebase.storage')->getBucket()->object("Images/".$photo->link);
+
+            if ($imageReference->exists()) {
+            $image = $imageReference->signedUrl($expiresAt);
+            } else {
+            $image = null;
+            }
+            //array_push($images,$image);
+
+            $folderPath = public_path('firebase-temp-uploads') .'/';
+            $file = $folderPath . $photo->link;
+            file_put_contents($file, file_get_contents($image));
+        } 
+
+        $expiresAt = new \DateTime('tomorrow');
+        $imageReference = app('firebase.storage')->getBucket()->object("Images/".$workorder->client_sign);
+
+        if ($imageReference->exists()) {
+        $image = $imageReference->signedUrl($expiresAt);
+        } else {
+        $image = null;
+        }
+
+        $folderPath = public_path('firebase-temp-uploads') .'/';
+        $file = $folderPath . $workorder->client_sign;
+        file_put_contents($file, file_get_contents($image));
+
+        $data = [
+            'workorder_id' => $workorder->id,
+            'client_id' => $client->id,
+            'client_first_name' => $client->first_name,
+            'client_last_name' => $client->last_name,
+            'user_id' => $user->id,
+            'user_first_name' => $user->first_name,
+            'user_last_name' => $user->last_name,
+            'state_id' => $workorderState->id,
+            'state_description' => $workorderState->description,
+            'pieces_workorder' => $pieces_workorder,
+            'photos_workorder' => $photos_workorder,
+            'car_initial_state' => $workorder->car_initial_state,
+            'car_initial_date' => $workorder->car_initial_date,
+            'car_final_state' => $workorder->car_final_state,
+            'car_final_date' => $workorder->car_final_date,
+            'car_workorder_price' => $workorder->car_workorder_price,
+            'client_sign' => $workorder->client_sign,
+            //'images' => $images
+        ];
+          
+        $pdf = PDF::loadView('workorders.my-pdf-file', $data);
+
+        //File::deleteDirectory(public_path('firebase-temp-uploads'));
+
+        return $pdf->download('Workorder '.$workorder->id.'.pdf');
+    }
     
     public function delete($id)
     {
