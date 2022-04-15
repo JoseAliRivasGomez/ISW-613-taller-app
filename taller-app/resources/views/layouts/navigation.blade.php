@@ -27,6 +27,12 @@
                     <x-nav-link :href="route('workorders')" :active="request()->routeIs('workorders')">
                         Workorders
                     </x-nav-link>
+                    @if (Auth::user()->role === "admin")
+                        <x-nav-link :href="route('users')" :active="request()->routeIs('users')">
+                            Users
+                        </x-nav-link>
+                    @else
+                    @endif
                 </div>
             </div>
 

@@ -39,21 +39,13 @@
 
                                     <h5>Signature for Workorder {{$workorder->id}}</h5>
 
+                                    <div>
+                                        <img src="{{ $imgURL }}" class="img-fluid" width="500"></br>
+                                    </div>
+
                                 </div>
 
                                 <div class="card-body">
-
-                                        @if ($message = Session::get('success'))
-
-                                            <div class="alert alert-success  alert-dismissible">
-
-                                                <button type="button" class="close" data-dismiss="alert">×</button>  
-
-                                                <strong>{{ $message }}</strong>
-
-                                            </div>
-
-                                        @endif
 
                                         <form method="POST" action="/workorders/{{$workorder->id}}/signature">
 
@@ -78,7 +70,8 @@
 
                                             <br/>
 
-                                            <button class="btn btn-success">Save</button>
+                                            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Save</button>
+                                            <a class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" href="/workorders">Cancel</a>
 
                                         </form>
 

@@ -44,7 +44,8 @@ class WorkorderController extends Controller
 
         if ($request->has('first_name') && $request->first_name) { 
             $selectedclients = Client::query()->where('first_name','ilike', "%$request->first_name%")
-            ->orWhere('last_name', 'ilike', "%$request->first_name%" )                        
+            ->orWhere('last_name', 'ilike', "%$request->first_name%" )
+            ->orWhere(DB::raw("CONCAT(first_name,' ',last_name)"), 'ilike', '%'.$request->first_name.'%')                    
             ->pluck('id');
             $workorders->whereIn('client_id', $selectedclients);
         }
@@ -57,7 +58,8 @@ class WorkorderController extends Controller
 
         if ($request->has('user_id') && $request->user_id) {
             $selectedUsers = User::query()->where('first_name','ilike', "%$request->user_id%")
-            ->orWhere('last_name', 'ilike', "%$request->user_id%" )                        
+            ->orWhere('last_name', 'ilike', "%$request->user_id%" )        
+            ->orWhere(DB::raw("CONCAT(first_name,' ',last_name)"), 'ilike', '%'.$request->user_id.'%')  
             ->pluck('id');
             $workorders->whereIn('user_id', $selectedUsers);
         }
@@ -140,7 +142,7 @@ class WorkorderController extends Controller
             return redirect("/workorders/$id/pieces_list");
         }
         $workorder = Workorder::find($id);
-        $pieces = Piece::all();
+        $pieces = Piece::all()->where('is_active', true);
         $pieces_workorder = WorkorderChangedPieces::where('workorder_id', $workorder->id)->get();
         return view('workorders.pieces_list', [
             'workorder' => $workorder,
@@ -271,9 +273,23 @@ class WorkorderController extends Controller
             alert()->success('Successfull','The signature has been added to workorder');
             return redirect("/workorders");
         }
+        
         $workorder = Workorder::find($id);
+
+        $expiresAt = new \DateTime('tomorrow');
+        $imageReference = app('firebase.storage')->getBucket()->object("Images/".$workorder->client_sign);
+
+        $imgURL = "";
+        if ($imageReference->exists()) {
+            $image = $imageReference->signedUrl($expiresAt);
+            $imgURL = $image;
+        } else {
+            $image = null;
+        }
+
         return view('workorders.signature', [
-            'workorder' => $workorder
+            'workorder' => $workorder,
+            'imgURL' => $imgURL
         ]);
     }
 
@@ -315,14 +331,13 @@ class WorkorderController extends Controller
         $imageReference = app('firebase.storage')->getBucket()->object("Images/".$workorder->client_sign);
 
         if ($imageReference->exists()) {
-        $image = $imageReference->signedUrl($expiresAt);
+            $image = $imageReference->signedUrl($expiresAt);
+            $folderPath = public_path('firebase-temp-uploads') .'/';
+            $file = $folderPath . $workorder->client_sign;
+            file_put_contents($file, file_get_contents($image));
         } else {
-        $image = null;
+            $image = null;
         }
-
-        $folderPath = public_path('firebase-temp-uploads') .'/';
-        $file = $folderPath . $workorder->client_sign;
-        file_put_contents($file, file_get_contents($image));
 
         $data = [
             'workorder_id' => $workorder->id,
@@ -409,9 +424,8 @@ class WorkorderController extends Controller
             alert()->success('Successfull','The workorder has been deleted');
             return redirect('/workorders');
         } catch (\Throwable $th) {
-            alert()->error('Error','Error to workorder delete');
+            alert()->error('Error','Unable to delete this workorder because it is connected to photos or pieces');
             return redirect('/workorders');
         }
-
     }
 }

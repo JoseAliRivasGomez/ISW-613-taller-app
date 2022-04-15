@@ -86,7 +86,7 @@
                         </h1>
                         
                         <label class="mt-5">Reparation cost:</label>
-                        <input class="mt-5" type="number" name="car_workorder_price" value="{{$workorder->car_workorder_price}}"></br>gi 
+                        <input class="mt-5" type="number" name="car_workorder_price" value="{{$workorder->car_workorder_price}}"></br>
                         <br><hr><br>
 
                         <h1 class="font-bold text-3xl text-gray-800 leading-tight">

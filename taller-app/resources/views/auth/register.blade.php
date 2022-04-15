@@ -9,6 +9,8 @@
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
+        @if (Auth::user()->role === "admin")
+            
         <form method="POST" action="{{ route('register') }}">
             @csrf
 
@@ -31,6 +33,16 @@
                 <x-label for="phone" :value="__('Phone')" />
 
                 <x-input id="phone" class="block mt-1 w-full" type="tel" name="phone" :value="old('phone')" placeholder="####-####" pattern="[0-9]{4}-[0-9]{4}" required autofocus />
+            </div>
+
+            <!-- Role -->
+            <div class="mt-4">
+                <x-label for="role" :value="__('Role')" />
+
+                <select name="role" id="role" class="block mt-1 w-full">
+                    <option value="admin">Admin</option>
+                    <option value="technician">Technician</option>
+                </select>
             </div>
 
             <!-- Email Address -->
@@ -60,14 +72,23 @@
             </div>
 
             <div class="flex items-center justify-end mt-4">
+
+            <!--
                 <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
                     {{ __('Already registered?') }}
                 </a>
+                -->
 
                 <x-button class="ml-4">
                     {{ __('Register') }}
                 </x-button>
             </div>
         </form>
+
+        @else
+            <p>Oops, you are not an admin</p>
+        @endif
+
+        
     </x-auth-card>
 </x-guest-layout>
