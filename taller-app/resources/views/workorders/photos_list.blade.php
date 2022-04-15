@@ -19,11 +19,13 @@
                         <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Save</button>
                         <a class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" href="/workorders">Cancel</a>
                     </form>
-                    <ul class="mt-6">
+                    <div class="mt-6">
                         <label>Photos:</label></br></br>
+                    </div>
+                    <ul class="">
                         @if (count($photos_workorder) > 0)
                             @for ($i = 0; $i < count($photos_workorder); $i++)
-                            <li class="inline mt-2">
+                            <li class="flex mt-2">
                                 <div class="mr-2">
                                     <form method="POST" action="/workorders/{{$workorder->id}}/photos_list/{{$photos_workorder[$i]->id}}">
                                         @csrf
@@ -32,7 +34,7 @@
                                     </form>
                                 </div>
                                 <div>
-                                    <img src="{{ $images[$i] }}" class="img-fluid" alt="Responsive image" width="300"></br>
+                                    <img src="{{ $images[$i] }}" class="img-fluid" width="400"></br>
                                 </div>
                             </li>
                             @endfor

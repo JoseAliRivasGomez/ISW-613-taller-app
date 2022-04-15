@@ -96,6 +96,7 @@ class PieceController extends Controller
             'description' => 'required',
             'quantity' => 'required',
             'cost' => 'required',
+            'is_active' => 'required'
         ]);
         $piece = Piece::find($request->id);
         $piece->update($request->all());
@@ -111,8 +112,13 @@ class PieceController extends Controller
      */
     public function destroy($id)
     {
-        Piece::destroy($id);
-        alert()->success('Successfull','The piece has been deleted');
-        return redirect('/pieces');
+        try {
+            Piece::destroy($id);
+            alert()->success('Successfull','The piece has been deleted');
+            return redirect('/pieces');
+        } catch (\Throwable $th) {
+            alert()->error('Error','Unable to delete this piece because it is connected to workorders');
+            return redirect('/pieces');
+        }
     }
 }

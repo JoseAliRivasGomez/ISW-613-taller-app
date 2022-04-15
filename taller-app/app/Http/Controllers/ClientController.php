@@ -117,8 +117,13 @@ class ClientController extends Controller
      */
     public function destroy($id)
     {
-        Client::destroy($id);
+        try {
+            Client::destroy($id);
         alert()->success('Successfull','The client has been deleted');
         return redirect('/clients');
+        } catch (\Throwable $th) {
+            alert()->error('Error','Unable to delete this client because he/she is connected to workorders');
+            return redirect('/clients');
+        }
     }
 }

@@ -7,6 +7,8 @@ use App\Http\Requests\Auth\LoginRequest;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\DB;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -28,11 +30,25 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request)
     {
-        $request->authenticate();
 
-        $request->session()->regenerate();
+        $is_active = DB::table('users')->where('email', $request->email)->value('is_active');
 
-        return redirect()->intended(RouteServiceProvider::HOME);
+        if($is_active){
+
+            $request->authenticate();
+
+            $request->session()->regenerate();
+
+            return redirect()->intended(RouteServiceProvider::HOME);
+
+        }else{
+
+            alert()->error('Error','That user does not exist or is not active anymore');
+            return redirect('/login');
+
+        }
+
+        
     }
 
     /**

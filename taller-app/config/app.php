@@ -182,6 +182,8 @@ return [
 
         Barryvdh\DomPDF\ServiceProvider::class,
 
+        RealRashid\SweetAlert\SweetAlertServiceProvider::class,
+
     ],
 
     /*

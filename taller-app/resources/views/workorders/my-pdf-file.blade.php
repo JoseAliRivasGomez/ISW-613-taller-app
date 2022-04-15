@@ -50,7 +50,13 @@
     <label>Client sign:</label></br></br>
     <div>
         <h5></h5>
+        @if ($client_sign)
         <img src="{{public_path('firebase-temp-uploads').'/'.$client_sign}}" width="300"></br>
+        @else
+        <li>
+            No signature found
+        </li>
+        @endif
     </div>
 </body>
 </html>

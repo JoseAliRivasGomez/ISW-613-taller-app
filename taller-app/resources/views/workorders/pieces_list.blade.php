@@ -25,10 +25,12 @@
                         <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Save</button>
                         <a class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" href="/workorders">Cancel</a>
                     </form>
-                    <ul class="mt-6">
+                    <div class="mt-6">
                         <label>Pieces:</label></br></br>
+                    </div>
+                    <ul class="">
                         @forelse ($pieces_workorder as $line)
-                        <li class="inline mt-2">
+                        <li class="flex mt-2">
                             <div class="mr-2">
                                 <form method="POST" action="/workorders/{{$workorder->id}}/pieces_list/{{$line->id}}">
                                     @csrf

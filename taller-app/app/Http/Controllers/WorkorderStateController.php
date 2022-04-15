@@ -99,8 +99,13 @@ class WorkorderStateController extends Controller
      */
     public function destroy($id)
     {
-        WorkorderState::destroy($id);
-        alert()->success('Successfull','The Workorder State has been deleted');
-        return redirect('/workorderstates');
+        try {
+            WorkorderState::destroy($id);
+            alert()->success('Successfull','The Workorder State has been deleted');
+            return redirect('/workorderstates');
+        } catch (\Throwable $th) {
+            alert()->error('Error','Unable to delete this Workorder State because it is connected to workorders');
+            return redirect('/workorderstates');
+        }
     }
 }
