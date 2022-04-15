@@ -42,19 +42,24 @@ class WorkorderController extends Controller
             $workorders->where('id', $request->id);
         }
 
-        /*check*/
-        if ($request->has('client_name') && $request->client_name) {
-            $workorders->where('client_id', $request->client_id);
+        if ($request->has('first_name') && $request->first_name) { 
+            $selectedclients = Client::query()->where('first_name','ilike', "%$request->first_name%")
+            ->orWhere('last_name', 'ilike', "%$request->first_name%" )                        
+            ->pluck('id');
+            $workorders->whereIn('client_id', $selectedclients);
         }
 
-        /*check*/
         if ($request->has('state_id') && $request->state_id) {
-            $workorders->where('state_id', $request->state_id);
+            $selectedWorkorderStates = WorkorderState::query()->where('description','ilike', "%$request->state_id%")
+            ->pluck('id');
+            $workorders->whereIn('state_id', $selectedWorkorderStates );
         }
 
-        /*check*/
         if ($request->has('user_id') && $request->user_id) {
-            $workorders->where('user_id', $request->user_id);
+            $selectedUsers = User::query()->where('first_name','ilike', "%$request->user_id%")
+            ->orWhere('last_name', 'ilike', "%$request->user_id%" )                        
+            ->pluck('id');
+            $workorders->whereIn('user_id', $selectedUsers);
         }
 
       
@@ -274,6 +279,9 @@ class WorkorderController extends Controller
 
     public function generatePDF($id)
     {
+        /*2 temp lines*/
+        File::deleteDirectory(public_path('firebase-temp-uploads'));
+        File::makeDirectory(public_path('firebase-temp-uploads'), 0777, true, true);
 
         File::deleteDirectory(public_path('firebase-temp-uploads'));
         File::makeDirectory(public_path('firebase-temp-uploads'), 0777, true, true);
