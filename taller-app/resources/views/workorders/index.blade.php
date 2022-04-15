@@ -19,7 +19,7 @@
                                     <input type="text" name="id" autofocus value="{{request()->get('id')}}">
                                 </td>
                                 <td>
-                                    <input type="text" name="client_name" autofocus value="{{request()->get('client_name')}}">
+                                    <input type="text" name="first_name" autofocus value="{{request()->get('first_name')}}">
                                 </td>
                                 <td>
                                     <input type="text" name="state_id" autofocus value="{{request()->get('state_id')}}">
@@ -45,7 +45,7 @@
                             <th scope="col" class="px-6 py-4 text-left uppercase tracking-wider">Id</th>
                             <th scope="col" class="px-6 py-4 text-left uppercase tracking-wider">Client</th>
                             <th scope="col" class="px-6 py-4 text-left uppercase tracking-wider">State</th>
-                            <th scope="col" class="px-6 py-4 text-left uppercase tracking-wider">User Id</th>
+                            <th scope="col" class="px-6 py-4 text-left uppercase tracking-wider">User</th>
                             <th scope="col" class="px-6 py-4 text-left uppercase tracking-wider">Initial Date</th>
                             <th scope="col" class="px-6 py-4 text-left uppercase tracking-wider">Final Date</th>
                             <th scope="col" class="px-6 py-4 text-left uppercase tracking-wider"></th>

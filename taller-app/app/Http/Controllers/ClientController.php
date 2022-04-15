@@ -66,7 +66,7 @@ class ClientController extends Controller
         ]);
 
         Client::create($request->all());
-        alert()->success('Successfull','The client has been saved');
+        alert::success('Successfull','The client has been saved');
         return redirect('/clients');
     }
 
