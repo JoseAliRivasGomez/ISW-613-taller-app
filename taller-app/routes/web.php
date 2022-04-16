@@ -6,6 +6,7 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\WorkorderStateController;
 use App\Http\Controllers\PieceController;
 use App\Http\Controllers\WorkorderController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 
@@ -77,6 +78,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/workorders/{id}/signature', [WorkorderController::class, 'signature']);
 
     Route::get('/workorders/{id}/export_pdf', [WorkorderController::class, 'generatePDF']);
+  
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::get('/users', [UserController::class, 'index'])->name('users');
     Route::get('/users/{id}/edit', [UserController::class, 'edit']);

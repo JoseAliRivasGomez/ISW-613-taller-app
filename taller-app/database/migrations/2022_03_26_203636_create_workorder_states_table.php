@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('workorder_states', function (Blueprint $table) {
             $table->id();
-            $table->string('description');
+            $table->string('description')->unique();
             $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
