@@ -48,8 +48,8 @@
                             <td class="px-6 py-2 whitespace-nowrap">{{$piece->quantity}}</td>
                             <td class="px-6 py-2 whitespace-nowrap">{{$piece->cost}}</td>
                             <td class="px-6 py-2 whitespace-nowrap">
-                                <a class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold px-4 rounded" href="/pieces/{{$piece->id}}/edit">Edit</a>
-                                <a class="bg-red-500 hover:bg-red-700 text-white font-bold px-4 rounded" href="/pieces/{{$piece->id}}/delete">Delete</a>
+                                <a class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold px-4 rounded" href="/pieces/{{$piece->id}}/edit"><x-carbon-edit style="color:white; display:inline; padding-top:2px; padding-bottom:4px" class="h-6"/></a>
+                                <a class="bg-red-500 hover:bg-red-700 text-white font-bold px-4 rounded" href="/pieces/{{$piece->id}}/delete">  X  </a>
                             </td>
                         </tr>
                         @empty
