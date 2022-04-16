@@ -15,14 +15,11 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('workorders')" :active="request()->routeIs('workorders')">
-                        Workorders
-                    </x-nav-link>
                     <x-nav-link :href="route('clients')" :active="request()->routeIs('clients')">
                         Clients
                     </x-nav-link>
                     <x-nav-link :href="route('pieces')" :active="request()->routeIs('pieces')">
-                        Inventory
+                        Pieces
                     </x-nav-link>
                     <x-nav-link :href="route('workorderstates')" :active="request()->routeIs('workorderstates')">
                         Workorder States

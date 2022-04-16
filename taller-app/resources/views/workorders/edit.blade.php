@@ -86,11 +86,8 @@
                         </h1>
                         
                         <label class="mt-5">Reparation cost:</label>
-                        <input class="mt-5" type="number" name="car_workorder_price" value="{{$workorder->car_workorder_price}}"></br><br> 
-                        <a class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" href="/workorders/{{$workorder->id}}/photos_list">Reparation Photos</a>
-                        <a class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" href="/workorders/{{$workorder->id}}/pieces_list">Reparation Items</a>
-
-                        <br><br><hr><br>
+                        <input class="mt-5" type="number" name="car_workorder_price" value="{{$workorder->car_workorder_price}}"></br>
+                        <br><hr><br>
 
                         <h1 class="font-bold text-3xl text-gray-800 leading-tight">
                         Final Diagnostic
@@ -100,7 +97,9 @@
                         <textarea class="mt-5" name="car_final_state" rows="4" cols="50">{{$workorder->car_final_state}}</textarea></br>
                         <label class="mt-5">Final Date:</label>
                         <input class="mt-5" type="date" name="car_final_date" value="{{substr($workorder->car_final_date, 0, 10)}}"></br>
-                        <br><a class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded" href="/workorders/{{$workorder->id}}/signature">Client Sign</a><br>
+                        
+                     
+                        
                         <button class="mt-5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Save</button>
                         <a class="mt-5 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" href="/workorders">Cancel</a>
                     </form>
