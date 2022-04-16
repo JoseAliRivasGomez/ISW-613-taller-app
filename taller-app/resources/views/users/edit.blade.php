@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Edit Piece
+            Edit User State
         </h2>
     </x-slot>
 
@@ -18,21 +18,20 @@
                             </ul>
                         </div>
                     @endif
-                    <form method="POST" action="/pieces/{{$piece->id}}">
+
+                    @if (Auth::user()->role === "admin")
+                    <form method="POST" action="/users/{{$user->id}}">
                         @csrf
                         @method('PUT')
-                        <label class="mt-5">Description:</label>
-                        <input class="mt-5" type="text" name="description" required value="{{$piece->description}}"></br>
-                        <label class="mt-5">Quantity:</label>
-                        <input class="mt-5" type="number" name="quantity" required value="{{$piece->quantity}}"></br>
-                        <label class="mt-5">Cost:</label>
-                        <input class="mt-5 mb-5" type="number" name="cost" required value="{{$piece->cost}}"></br>
                         <label>Is Active:</label>
                         <input type="hidden" name="is_active" value="0">
-                        <input type="checkbox" name="is_active" value="1" {{$piece->is_active || old('is_active', 0) === 1 ? 'checked' : ''}}></br>
+                        <input type="checkbox" name="is_active" value="1" {{$user->is_active || old('is_active', 0) === 1 ? 'checked' : ''}}></br>
                         <button class="mt-5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Save</button>
-                        <a class="mt-5 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" href="/pieces">Cancel</a>
+                        <a class="mt-5 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" href="/users">Cancel</a>
                     </form>
+                    @else
+                        <p>Oops, you are not an admin</p>
+                    @endif
                 </div>
             </div>
         </div>

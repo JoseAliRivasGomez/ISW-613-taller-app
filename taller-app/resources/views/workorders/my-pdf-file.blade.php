@@ -93,9 +93,15 @@
                         Client Sign
                         </h2>
 
+                        @if ($client_sign)
                         <div>
                         <img src="{{public_path('firebase-temp-uploads').'/'.$client_sign}}" width="300"></br>
                         </div>
+                        @else
+                        <li>
+                            No signature found
+                        </li>
+                        @endif
 
                         <button class="mt-5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Save</button>
                         <a class="mt-5 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" href="/workorders">Cancel</a>
@@ -103,6 +109,5 @@
             </div>
         </div>
     </div>
-
 </body>
 </html>
