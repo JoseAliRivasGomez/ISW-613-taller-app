@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-    <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             Workorders
         </h2>
     </x-slot>
@@ -90,9 +90,12 @@
                             <td class="px-6 py-2 whitespace-nowrap">{{$workorder->car_initial_date}}</td>
                             <td class="px-6 py-2 whitespace-nowrap">{{$workorder->car_final_date}}</td>
                             <td class="px-6 py-2 whitespace-nowrap">
-                                <a class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold px-4 rounded" href="/workorders/{{$workorder->id}}/edit"><x-carbon-edit style="color:white; display:inline; padding-top:2px; padding-bottom:4px" class="h-6"/></a>
-                                <a class="bg-blue-500 hover:bg-blue-700 text-white font-bold px-4 rounded" href="/workorders/{{$workorder->id}}/export_pdf"><x-carbon-generate-pdf style="color:white; display:inline;  padding-top:2px; padding-bottom:4px" class="h-6"/></a>
-                                <a class="bg-red-500 hover:bg-red-700 text-white font-bold px-4 rounded" href="/workorders/{{$workorder->id}}/delete"> X </a>
+                                <a class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold px-4 rounded" href="/workorders/{{$workorder->id}}/edit">Edit</a>
+                                <a class="bg-blue-500 hover:bg-blue-700 text-white font-bold px-4 rounded" href="/workorders/{{$workorder->id}}/pieces_list">Pieces</a>
+                                <a class="bg-red-500 hover:bg-red-700 text-white font-bold px-4 rounded" href="/workorders/{{$workorder->id}}/photos_list">Photos</a>
+                                <a class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold px-4 rounded" href="/workorders/{{$workorder->id}}/signature">Sign</a>
+                                <a class="bg-blue-500 hover:bg-blue-700 text-white font-bold px-4 rounded" href="/workorders/{{$workorder->id}}/export_pdf">Export</a>
+                                <a class="bg-red-500 hover:bg-red-700 text-white font-bold px-4 rounded" href="/workorders/{{$workorder->id}}/delete">Delete</a>
                             </td>
                         </tr>
                         @empty

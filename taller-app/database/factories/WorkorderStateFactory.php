@@ -17,7 +17,7 @@ class WorkorderStateFactory extends Factory
     public function definition()
     {
         return [
-            'description' => $this->faker->unique()->randomElement(['received', 'in review', 'delivered']),
+            'description' => $this->faker->randomElement(['received', 'in review', 'delivered']),
             'is_active' => true,
         ];
     }
