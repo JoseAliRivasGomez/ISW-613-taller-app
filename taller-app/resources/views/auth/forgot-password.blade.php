@@ -3,7 +3,7 @@
         <x-slot name="logo">
             <a href="/">
                 <!--<x-application-logo class="w-20 h-20 fill-current text-gray-500" /> -->
-                <img src="https://firebasestorage.googleapis.com/v0/b/taller-app-16199.appspot.com/o/Images%2Flogo.png?alt=media&token=77564f28-f8c5-4060-9bce-d16ff2dd3c1a" class="block h-10 w-auto fill-current text-gray-600" />
+                <img src="img/logo.png" class="block h-10 w-auto fill-current text-gray-600" />
             </a>
         </x-slot>
 
