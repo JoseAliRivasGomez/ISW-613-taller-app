@@ -22,7 +22,8 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    //return view('welcome');
+    return view('auth/login');
 });
 
 Route::get('/dashboard', function () {

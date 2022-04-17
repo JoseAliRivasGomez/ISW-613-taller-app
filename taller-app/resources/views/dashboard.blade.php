@@ -21,7 +21,11 @@
                         <div class="flex flex-row justify-center ">
                             @forelse($workorders as $workorder)
                             <div class="bg-emerald-200 w-1/4 h-28 text-center ml-12 mr-12" >
-                            <p>{{$workorder->state_id}}</p>
+                            @foreach ($states as $state)
+                                @if ($state->id === $workorder->state_id)
+                                    <p>{{$state->description}}</p>
+                                @endif
+                            @endforeach
                             <h1 style="font-size:40pt"><strong>{{$workorder->count}}</strong></h1>
                             </div>
                             @empty
