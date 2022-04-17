@@ -7,7 +7,7 @@
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}">
                         <!--<x-application-logo class="w-20 h-20 fill-current text-gray-500" /> -->
-                        <img src="img/logo.png" class="block h-10 w-auto fill-current text-gray-600" />
+                        <img src="{{ URL::asset('img/logo.png') }}" class="block h-10 w-auto fill-current text-gray-600" />
                     </a>
                 </div>
 

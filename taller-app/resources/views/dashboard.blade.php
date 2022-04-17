@@ -32,7 +32,7 @@
                                 @if ($state->id === $workorder->state_id)
                                     <p>{{$state->description}}</p>
                                 @endif
-                            @endforeach+
+                            @endforeach
                             <h1 style="font-size:40pt"><strong>{{$workorder->count}}</strong></h1>
                             </div>
                             @empty
