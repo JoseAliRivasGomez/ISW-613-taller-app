@@ -34,7 +34,8 @@ Route::get('/dashboard', function () {
 require __DIR__.'/auth.php';
 
 Route::group(['middleware' => ['auth']], function () {
-    //only authenticated users can access these routes    
+    //only authenticated users can access these routes 
+
     Route::get('/clients', [ClientController::class, 'index'])->name('clients');
     Route::get('/clients/create', [ClientController::class, 'create']);
     Route::get('/clients/{id}/edit', [ClientController::class, 'edit']);
@@ -90,5 +91,7 @@ Route::group(['middleware' => ['auth']], function () {
                 ->name('register');
 
     Route::post('register', [RegisteredUserController::class, 'store']);
+
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
 });
