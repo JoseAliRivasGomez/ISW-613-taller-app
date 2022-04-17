@@ -63,7 +63,7 @@
                             <td class="px-6 py-2 whitespace-nowrap">{{$user->role}}</td>
                             <td class="px-6 py-2 whitespace-nowrap"><input type="checkbox" name="is_active" {{$user->is_active ? 'checked' : ''}} disabled></td>
                             <td class="px-6 py-2 whitespace-nowrap">
-                                <a class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold px-4 rounded" href="/users/{{$user->id}}/edit">Edit State</a>
+                                <a class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold px-4 rounded" href="/users/{{$user->id}}/edit"><x-carbon-edit style="color:white; display:inline; padding-top:2px; padding-bottom:4px" class="h-6"/></a>
                             </td>
                         </tr>
                         @empty
