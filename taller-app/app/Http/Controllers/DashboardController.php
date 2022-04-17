@@ -25,12 +25,4 @@ class DashboardController extends Controller
         return view('dashboard', ['workorders' => $workorders, 'states' => $states] );
     }
 
-    /*return view('workorders.index', ['workorders' => $workorders->paginate(10),
-        'states' => $states,
-        'clients' => $clients,
-        'users' => $users]);
-
-
-    Quote::query()->select('state',Quote::raw('count(state)') )->groupBy('state')->get();
-    */
 }
