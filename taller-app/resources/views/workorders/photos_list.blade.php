@@ -17,7 +17,7 @@
                         <label>Add Photo:</label>
                         <input type="file" class="form-control" name="photos[]" accept="image/*" multiple/>
                         <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Save</button>
-                        <a class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" href="/workorders">Cancel</a>
+                        <a class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" href="/workorders/{{$workorder->id}}/edit">Cancel</a>
                     </form>
                     <div class="mt-6">
                         <label>Photos:</label></br></br>

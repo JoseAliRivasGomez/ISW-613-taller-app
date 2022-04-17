@@ -16,7 +16,7 @@
                         </h1>
                         <hr>
 
-                        <label class="mt-5">User: {{ $client_first_name }} {{ $client_last_name }} </label><br>
+                        <label class="mt-5">User: {{ $user_first_name }} {{ $user_last_name }} </label><br>
                         <label class="mt-5">Workorder State: {{ $state_description }} </label><br>
                         <label class="mt-5">Client: {{ $client_first_name }} {{ $client_last_name }}</label><br>
 
@@ -38,7 +38,9 @@
                         </h2>
 
                         <table class="table-fixed">
-                        $reparationCost = 0;    
+                        @php
+                            $reparationCost = 0;    
+                        @endphp
                             <thead>
                                 <tr>
                                 <th>   Quantity   </th>
@@ -48,7 +50,7 @@
                             </thead>
                             <tbody>
                                 @forelse ($pieces_workorder as $line)
-                                $reparationCost += {{$line->piece->cost}}
+                                {{ $reparationCost += $line->piece->cost }}
                                 <tr>
                                 <td>{{$line->quantity}}</td>
                                 <td>{{$line->piece->description}}</td>
@@ -62,16 +64,16 @@
                             </tbody>
                             </table>
                         <br>
-                        <h2 class="mt-5">Reparation cost: <strong> $reparationCost <strong>  </h2>
+                        <h2 class="mt-5">Reparation cost: <strong>${{ $reparationCost + $car_workorder_price }}<strong>  </h2>
                         
                         <h2 class="font-bold text-xl text-gray-800 leading-tight">
                         Photos
                         </h2>
 
                             @if (count($photos_workorder) > 0)
-                            @for ($i = 0; $i < count($photos_workorder); $i++)
+                                @for ($i = 0; $i < count($photos_workorder); $i++)
                                 <div>
-                                    <img src="{{public_path('firebase-temp-uploads').'/'.$photos_workorder[$i]->link}}" width="300"></br>
+                                    <img src="{{public_path('firebase-temp-uploads').'/'.$photos_workorder[$i]->link}}" width="300" style="margin-bottom:10px">
                                 </div>
                                 @endfor
                             @else
@@ -103,8 +105,7 @@
                         </li>
                         @endif
 
-                        <button class="mt-5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Save</button>
-                        <a class="mt-5 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" href="/workorders">Cancel</a>
+                        
                 </div>
             </div>
         </div>
