@@ -62,7 +62,7 @@ class ClientController extends Controller
             'first_name' => 'required',
             'last_name' => 'required',
             'phone' => 'required',
-            'email' => 'required|email'
+            'email' => 'required|email|unique:clients'
         ]);
 
         try {
@@ -106,7 +106,7 @@ class ClientController extends Controller
             'first_name' => 'required',
             'last_name' => 'required',
             'phone' => 'required',
-            'email' => 'required|email'
+            'email' => 'required|email|unique:clients' 
         ]);
         
         try {
