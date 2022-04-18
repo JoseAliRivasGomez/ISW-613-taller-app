@@ -33,9 +33,9 @@ class WorkorderController extends Controller
     public function index(Request $request)
     {
         $workorders = Workorder::query()->orderBy('id');
-        $states = WorkorderState::all();
-        $clients = Client::all();
-        $users = User::all();
+        $states = WorkorderState::all()->sortBy('id');
+        $clients = Client::all()->sortBy('id');
+        $users = User::all()->sortBy('id');
 
 
         if ($request->has('id') && $request->id) {
@@ -88,8 +88,8 @@ class WorkorderController extends Controller
      */
     public function create()
     {
-        $states = WorkorderState::all();
-        $clients = Client::all();
+        $states = WorkorderState::all()->sortBy('id');
+        $clients = Client::all()->sortBy('id');
         return view('workorders.create', [
             'states' => $states,
             'clients' => $clients
@@ -142,7 +142,7 @@ class WorkorderController extends Controller
             return redirect("/workorders/$id/pieces_list");
         }
         $workorder = Workorder::find($id);
-        $pieces = Piece::all()->where('is_active', true);
+        $pieces = Piece::all()->where('is_active', true)->sortBy('id');
         $pieces_workorder = WorkorderChangedPieces::where('workorder_id', $workorder->id)->get();
         return view('workorders.pieces_list', [
             'workorder' => $workorder,
@@ -153,6 +153,13 @@ class WorkorderController extends Controller
 
     public function removePiece(Request $request)
     {
+        $piece_id = DB::table('workorder_changed_pieces')->where('id', $request->id)->value('piece_id');
+        $piece = Piece::find($piece_id);
+        $piece_quantity = DB::table('pieces')->where('id', $piece_id)->value('quantity');
+        $piece_quantity2 = DB::table('workorder_changed_pieces')->where('id', $request->id)->value('quantity');
+        $r = $piece_quantity + $piece_quantity2;
+        $piece->update(['quantity' => $r]);
+
         WorkorderChangedPieces::where(['id' => $request->id, 'workorder_id' => $request->workorder_id])->delete();
         alert()->success('Successfull','The piece has been removed of workorder');
         return redirect("/workorders/$request->workorder_id/pieces_list");
@@ -380,9 +387,9 @@ class WorkorderController extends Controller
     public function edit($id)
     {
         $workorder = Workorder::find($id);
-        $states = WorkorderState::all();
-        $clients = Client::all();
-        $users = User::all();
+        $states = WorkorderState::all()->sortBy('id');
+        $clients = Client::all()->sortBy('id');
+        $users = User::all()->sortBy('id');
         return view('workorders.edit', ['workorder' => $workorder,
         'states' => $states,
         'clients' => $clients,
