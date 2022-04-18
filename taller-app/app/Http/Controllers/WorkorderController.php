@@ -410,7 +410,8 @@ class WorkorderController extends Controller
             'state_id' => 'required',
             'user_id' => 'required',
             'car_initial_state' => 'required',
-            'car_initial_date' => 'required'
+            'car_initial_date' => 'required',
+            'car_final_date' => 'after_or_equal:car_initial_date',
         ]);
         $workorder = Workorder::find($request->id);
         $workorder->update($request->all());
