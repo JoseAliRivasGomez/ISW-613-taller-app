@@ -71,7 +71,7 @@ class ClientController extends Controller
             return redirect('/clients');
         } catch (\Throwable $th) {
             alert()->error('Error','That email is already registered for a client');
-            return redirect('/clients');
+            return back()->withInput($request->all());
         }
     }
 
@@ -116,7 +116,7 @@ class ClientController extends Controller
             return redirect('/clients');
         } catch (\Throwable $th) {
             alert()->error('Error','That email is already registered for a client');
-            return redirect('/clients');
+            return back()->withInput($request->all());
         }
     }
 
