@@ -50,9 +50,14 @@ class WorkorderStateController extends Controller
             'description' => 'required',
         ]);
 
-        WorkorderState::create($request->all());
-        alert()->success('Successfull','The Workorder State has been saved');
-        return redirect('/workorderstates');
+        try {
+            WorkorderState::create($request->all());
+            alert()->success('Successfull','The Workorder State has been saved');
+            return redirect('/workorderstates');
+        } catch (\Throwable $th) {
+            alert()->error('Error','That workorder state is already registered');
+            return redirect('/workorderstates');
+        }
     }
 
     /**
@@ -85,10 +90,16 @@ class WorkorderStateController extends Controller
         $request->validate([
             'description' => 'required',
         ]);
-        $workorderState = WorkorderState::find($request->id);
-        $workorderState->update($request->all());
-        alert()->success('Successfull','The Workorder State has been updated');
-        return redirect('/workorderstates');
+        
+        try {
+            $workorderState = WorkorderState::find($request->id);
+            $workorderState->update($request->all());
+            alert()->success('Successfull','The Workorder State has been updated');
+            return redirect('/workorderstates');
+        } catch (\Throwable $th) {
+            alert()->error('Error','That workorder state is already registered');
+            return redirect('/workorderstates');
+        }
     }
 
     /**
