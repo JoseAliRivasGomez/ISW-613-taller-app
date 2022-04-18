@@ -56,7 +56,7 @@ class WorkorderStateController extends Controller
             return redirect('/workorderstates');
         } catch (\Throwable $th) {
             alert()->error('Error','That workorder state is already registered');
-            return redirect('/workorderstates');
+            return back()->withInput($request->all());
         }
     }
 
@@ -98,7 +98,7 @@ class WorkorderStateController extends Controller
             return redirect('/workorderstates');
         } catch (\Throwable $th) {
             alert()->error('Error','That workorder state is already registered');
-            return redirect('/workorderstates');
+            return back()->withInput($request->all());
         }
     }
 
