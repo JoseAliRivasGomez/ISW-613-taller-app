@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class RegisteredUserController extends Controller
 {
@@ -42,20 +43,29 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
-        $user = User::create([
-            'first_name' => $request->first_name,
-            'last_name' => $request->last_name,
-            'phone' => $request->phone,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'is_active' => true,
-            'role' => $request->role,
-        ]);
+        try {
+            
+            $user = User::create([
+                'first_name' => $request->first_name,
+                'last_name' => $request->last_name,
+                'phone' => $request->phone,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'is_active' => true,
+                'role' => $request->role,
+            ]);
+    
+            event(new Registered($user));
+    
+            //Auth::login($user);
+    
+            return redirect(RouteServiceProvider::HOME);
 
-        event(new Registered($user));
+        } catch (\Throwable $th) {
+            alert()->error('Error','That email is already registered for a user');
+            return redirect('/users');
+        }
 
-        //Auth::login($user);
-
-        return redirect(RouteServiceProvider::HOME);
+        
     }
 }
