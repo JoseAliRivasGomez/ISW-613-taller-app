@@ -62,12 +62,17 @@ class ClientController extends Controller
             'first_name' => 'required',
             'last_name' => 'required',
             'phone' => 'required',
-            'email' => 'required|email'
+            'email' => 'required|email|unique:clients'
         ]);
 
-        Client::create($request->all());
-        alert::success('Successfull','The client has been saved');
-        return redirect('/clients');
+        try {
+            Client::create($request->all());
+            alert::success('Successfull','The client has been saved');
+            return redirect('/clients');
+        } catch (\Throwable $th) {
+            alert()->error('Error','That email is already registered for a client');
+            return back()->withInput($request->all());
+        }
     }
 
     /**
@@ -101,12 +106,18 @@ class ClientController extends Controller
             'first_name' => 'required',
             'last_name' => 'required',
             'phone' => 'required',
-            'email' => 'required|email'
+            'email' => 'required|email|unique:clients' 
         ]);
-        $client = Client::find($request->id);
-        $client->update($request->all());
-        alert()->success('Successfull','The client has been updated');
-        return redirect('/clients');
+        
+        try {
+            $client = Client::find($request->id);
+            $client->update($request->all());
+            alert()->success('Successfull','The client has been updated');
+            return redirect('/clients');
+        } catch (\Throwable $th) {
+            alert()->error('Error','That email is already registered for a client');
+            return back()->withInput($request->all());
+        }
     }
 
     /**
