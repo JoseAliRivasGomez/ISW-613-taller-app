@@ -85,16 +85,16 @@
 <row name="car_initial_state" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
-<row name="car_final_stage" null="1" autoincrement="0">
+<row name="car_final_state" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
-<row name="car_entrance_date" null="1" autoincrement="0">
+<row name="car_initial_date" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
-<row name="car_exit_date" null="1" autoincrement="0">
+<row name="car_final_date" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
-<row name="cost" null="1" autoincrement="0">
+<row name="car_workorder_price" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
 <row name="client_sign" null="1" autoincrement="0">
