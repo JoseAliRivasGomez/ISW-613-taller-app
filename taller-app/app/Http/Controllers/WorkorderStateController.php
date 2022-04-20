@@ -88,7 +88,7 @@ class WorkorderStateController extends Controller
     public function update(Request $request)
     {
         $request->validate([
-            'description' => 'required|unique:workorder_states',
+            'description' => 'required',
         ]);
         
         try {

@@ -50,7 +50,7 @@
                             </thead>
                             <tbody>
                                 @forelse ($pieces_workorder as $line)
-                                {{ $reparationCost += $line->piece->cost }}
+                                {{ $reparationCost += $line->piece->cost * $line->piece->quantity }}
                                 <tr>
                                 <td>{{$line->quantity}}</td>
                                 <td>{{$line->piece->description}}</td>
